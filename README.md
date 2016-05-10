@@ -7,6 +7,8 @@ provides CC-3.0-compatible implementations of the problematic `__ldg()` and `__s
 so patching fbcunn to work on CC 3.0 GPUs is just a matter of including those headers in the 
 right places, and recompiling against the older architecture.
 
+"The right places" to include the headers is defined by the `ldg_files` and `shfl_files` lists in this repo. The reason for lists rather than grepping for the intrinsic calls in cuda code is that patching one of the files that contains `__shfl()` causes the build to fail, so we need to exclude that file. Not the most elegant solution but it works (for me)!
+
 ## Installation
 1.  Install the [generics library](https://github.com/bryancatanzaro/generics)
 
